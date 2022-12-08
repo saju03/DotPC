@@ -1,0 +1,110 @@
+<%- include('../partials/user-headder') %>
+
+<main class="main">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html" rel="nofollow">Home</a>
+        <span></span> My account
+      </div>
+    </div>
+  </div>
+  <section class="pt-50 pb-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 m-auto">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="dashboard-menu">
+                <ul class="nav flex-column" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/profile"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/my-profile/view-orders"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/my-profile/address" class="nav-link active"><i class="fi-rs-marker mr-10"></i>My Address</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/my-profile/wallet" class="nav-link "><i class="fi-rs-marker mr-10"></i>My Wallet</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/my-profile/edit"><i class="fi-rs-user mr-10"></i>Account details</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="tab-content dashboard-content">
+                <div class="tab-pane fade active show" id="address" role="tabpanel" aria-labelledby="address-tab">
+                  <div class="row">
+                    <% addressList.forEach(element => { %>
+                    <div id="<%= element._id %>" class="col-lg-6 mb-4">
+                      <div class="card mb-3 mb-lg-0">
+                        <div class="card-header">
+                          <h5 class="mb-0"><%= element.name %> - <%= element.mobile %></h5>
+                        </div>
+                        <div class="card-body">
+                          <address class="mb-1">
+                            <%= element.place %>,<br>
+                            <%= element.city %>, <%= element.pin %>,<br>
+                            <%= element.state %>
+                          </address>
+                          <a onclick="editAddress('<%= user._id %>','<%= element._id %>')" class="btn-small text-muted">Edit</a>
+                          <a onclick="deleteAddress('<%= user._id %>','<%= element._id %>')" class="btn-small text-danger ms-2">Delete</a>
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %>
+                  </div>
+                  <div class="row mx-1 mt-2">
+                    <div class="toggle_info">
+                      <span><i class="fi-rs-user mr-10"></i> <a href="#newAddress" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Add new address</a></span>
+                    </div>
+                   
+                    <div class="panel-collapse collapse login_form" id="newAddress">
+                      <div class="panel-body">
+                        <form id="add-address">
+                          <div class="form-group">
+                            <input id="Name" required="" type="text" name="name" placeholder="Full name *" onchange="validateName()">
+                            <span id="name" class="mt-2 text-danger" style="font-size: 13px"></span>
+                          </div>
+                          <div class="form-group">
+                            <input required="" type="text" name="place" placeholder="Address *">
+                          </div>
+                          <div class="form-group">
+                            <input required="" type="text" name="city" placeholder="City / Town *">
+                          </div>
+                          <div class="form-group">
+                            <input required="" type="text" name="state" placeholder="State / County *">
+                          </div>
+                          <div class="form-group">
+                            <input required="" id="pin" type="text" name="pin" placeholder="Postcode / ZIP *" onchange="validZipcode()">
+                            <span id="pinError" class="mt-2 text-danger" style="font-size: 13px"></span>
+                          </div>
+                          <div class="form-group">
+                            <input required="" id="phonenumber" type="text" name="mobile" placeholder="Phone *" onchange="validEmail()">
+                            <span id="phonenumbers" class="mt-2 text-danger" style="font-size: 13px"></span>
+                          </div>
+                          
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white border-radius-5 btn-shadow-brand hover-up" onclick="addAddress()" name="login">Add address</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('../partials/user-footer') %>

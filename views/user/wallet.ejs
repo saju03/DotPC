@@ -1,0 +1,66 @@
+
+<%- include('../partials/user-headder') %>
+<main class="main">
+    <div class="page-header breadcrumb-wrap">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/" rel="nofollow">Home</a>
+          <span></span> My Wallet
+        </div>
+      </div>
+    </div>
+    <section class="pt-50 pb-150">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 m-auto">
+            <div class="row">
+              <div class="col-md-4">
+  
+                <div class="dashboard-menu">
+                  <ul class="nav flex-column" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link " href="/profile"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/my-profile/view-orders"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/my-profile/address" class="nav-link"><i class="fi-rs-marker mr-10"></i>My Address</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/my-profile/wallet" class="nav-link active"><i class="fi-rs-marker mr-10"></i>My Wallet</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/my-profile/edit"><i class="fi-rs-user mr-10"></i>Account details</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/logout"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                    </li>
+                  </ul>
+                </div>
+  
+  
+  
+              </div>
+              <div class="col-md-8">
+                <div class="tab-content dashboard-content">
+                  <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="mb-0">Hello <%= user.userName %>!</h5>
+                      </div>
+                      <div class="card-body">
+                        <P>Your Wallet Balance is<H2>$<%= user.wallet %></H2></P>
+                        <p>Your Refral Id is : <%= user.referalCode %> </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%- include('../partials/user-footer') %>

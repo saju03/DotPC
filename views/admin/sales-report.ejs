@@ -1,0 +1,136 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+ <%- include('../partials/admin-headder') %>
+
+  
+  
+ <html>
+    <body>
+        
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">sales report </h2>
+            
+        </div>
+        
+    </div>
+    <div class="card mb-4">
+     
+
+        <% if (response) { %>
+         
+      
+        
+        </header>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="table-responsive">
+                    <table class="table align-middle table-nowrap mb-0" id="sales-report">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-center">
+                                    <div class="form-check align-middle">
+                                        <input class="form-check-input" type="checkbox" id="transactionCheck01">
+                                        <label class="form-check-label" for="transactionCheck01"></label>
+                                    </div>
+                                </th>
+                                <th class="align-middle" scope="col">Order ID</th>
+                                <th class="align-middle" scope="col">Billing ID</th>
+                                <th class="align-middle" scope="col">Date</th>
+                                <th class="align-middle" scope="col">Total</th>
+                                <th class="align-middle" scope="col">Payment Status</th>
+                                <th class="align-middle" scope="col">Payment Method</th>
+                                <th class="align-middle" scope="col">Product Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% response.data.forEach(element => { %>
+                                <% let orderDate = element.date%> 
+                                <% const [Date, Month, Year] = orderDate.toLocaleDateString().split('/') %> 
+                                <% const dateNow =  Date + '-' + Month + '-' + Year%>
+                             
+                           
+                            <tr>
+                                <td class="text-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="transactionCheck02">
+                                        <label class="form-check-label" for="transactionCheck02"></label>
+                                    </div>
+                                </td>
+                                <td><a href="/admin/single-order/<%= element._id %>" class="fw-bold"><%= element._id %> </a> </td>
+                                
+                                <td><%= element.userId %> </td>
+                                <td>
+                                  <%= dateNow %> 
+                                </td>
+                                <td>
+                                  $ <%= element.orderTotal %> 
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-soft-success"><%= element.PaymentStatus %> </span>
+                                </td>
+                                <td>
+                                    <i class="material-icons md-payment font-xxl text-muted mr-5"></i> <%= element.Payment %> 
+                                </td>
+                                <td>
+                                  <%= element.product.length %> 
+                                </td>
+                            </tr>
+                            <% }) %>
+                            
+                              </div>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- table-responsive end// -->
+        </div>
+        <% } %>
+    </div>
+</section> <!-- content-main end// -->
+
+
+<script>
+$(document).ready(function() {
+$('#sales-report').DataTable({
+    bPaginate: false,
+    searching: false,
+    info: false,
+    bFilter: false,
+    bInfo: false,
+    bLengthChange: false,
+    dom: 'Bfrtip',
+    buttons: [
+        'csvHtml5',
+        'pdfHtml5'
+    ]
+});
+})
+</script>
+
+<script type="text/javascript" language="javascript" src='https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js' defer></script>
+<script type="text/javascript" language="javascript" src='https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js' defer></script>
+<script type="text/javascript" language="javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js' defer></script>
+<script type="text/javascript" language="javascript" src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js' defer></script>
+<script type="text/javascript" language="javascript" src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js' defer></script>
+<script type="text/javascript" language="javascript" src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js' defer></script>
+<script type="text/javascript" language="javascript" src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js' defer></script>
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+
+
+    <%- include('../partials/admin-footer') %>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+</html>

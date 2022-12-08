@@ -1,0 +1,109 @@
+
+        <%- include('../partials/admin-headder') %>
+
+
+        <section class="content-main">
+            <div class="content-header">
+                <h2 class="content-title">Product list</h2>
+                <div>
+                    <a href="#" class="btn btn-primary"><i class="material-icons md-plus"></i>Add Product</a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                    <div class="row gx-3">
+                        <div class="col-lg-4 col-md-6 me-auto">
+                            <input type="text" placeholder="Search..." class="form-control">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <select class="form-select">
+                                <option>Status</option>
+                                <option>Active</option>
+                                <option>Disabled</option>
+                                <option>Show all</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <select class="form-select">
+                                <option>Show 20</option>
+                                <option>Show 30</option>
+                                <option>Show 40</option>
+                            </select>
+                        </div>
+                    </div>
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Discription</th>
+                                    <th>Brand</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                   
+                                    <th class="text-end"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% product.forEach(element => { %>
+                                 
+                               
+                                <tr>
+                                    <td width="10%">
+                                        <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
+                                            <a class="itemside" href="#">
+                                              <div class="left">
+                                                <img src="/images/<%= element.image[0] %>" class="img-sm img-thumbnail" alt="Item">
+                                              </div>
+                                             
+                                            </a>
+                                          </div>
+                                    </td>
+                                    <td> <div class="info">
+                                        <h6 class="mb-0"><%= element.name %> </h6>
+                                      </div></td>
+                                    <td> 
+                                    <span><%= element.description.substring(0,48)+"..."; %> </span>
+
+                                    </td>
+                                    <td>
+                                        <%= element.brand %>
+                                    </td>
+
+                                    <td> <span>$<%= element.price %> </span></td>
+        
+                                    <td>
+                                        <span><%= element.category %> </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="dropdown">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                            <div class="dropdown-menu">
+                                               
+                                                <a href="edit-product/<%= element._id %> " class="btn btn-sm font-sm rounded btn-brand">
+                                                    <i class="material-icons md-edit"></i>Edit </a>
+                                                  </a>
+                                                <a id="deleteProduct" onclick="deleteProduct('<%= element._id %>')" class="btn btn-sm font-sm btn-light rounded">
+                                                    <i class="material-icons md-delete_forever"></i>Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table> <!-- table-responsive.// -->
+                    </div>
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+  <script src="/javascripts/ajaxRequests.js"></script>
+        </section> <!-- content-main end// -->
+            <%- include('../partials/admin-footer') %>
+        </body>
+        
+        
+        <!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+        </html>

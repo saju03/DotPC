@@ -1,0 +1,201 @@
+<%- include('../partials/user-headder') %>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<main class="main">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/" rel="nofollow">Home</a>
+        <span></span> Shop
+        <span></span> Checkout
+      </div>
+    </div>
+  </div>
+  <% if (products) { %>
+   
+
+  <% if(products.length> 0){ %>
+    
+  <section class="mt-50 mb-50">
+    <form id="order-checkout">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-25">
+            <h4>Delivery address</h4>
+          </div>
+          <div class="mb-sm-15">
+            <% if (address) { %>
+             
+              <div class="address-list mb-3">
+                <% count=1, address.forEach(element=> { %>
+                <div class="form-check mb-3 custome-radio choose-address">
+
+                  <input value="<%= element._id %>" class="form-check-input deliveryAddress" type="radio" name="address" id="deliveryAddress-<%= count %>" <% if (count===1) { %>checked<% } %> >
+                  <label class="form-check-label" for="deliveryAddress-<%= count %>">
+
+                    <%= element.name %>,
+                    <%= element.mobile %>,
+                    <%= element.place %>,
+                    <%= element.city %>,
+                    <%= element.pin %>...
+                  </label>
+                </div>
+                <% count++ }) %>
+              </div>
+              <% } %>
+              <div class="toggle_info">
+                <span><i class="fi-rs-user mr-10"></i><span class="text-muted">Want to ship to a new location?</span>
+              </div>
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="order_review">
+            <div class="mb-20">
+              <h4>Your Orders</h4>
+            </div>
+            <div class="table-responsive order_table text-center">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th colspan="2">Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% products.forEach(element=> { %>
+
+                  <tr>
+                    <td class="image product-thumbnail"><img src="/images/<%= element.image[0] %>" alt="<%= element.name %>">
+                    </td>
+                    <td>
+                      <h5>
+                        <%= element.name %>
+                      </h5> <span class="product-qty">x <%= element.count %>
+                      </span>
+                    </td>
+                    <td id="checkout-total">$<span>
+                        <%= element.price*element.count%>
+                      </span></td>
+                  </tr>
+
+                  <% }) %>
+                  <tr>
+                    <th>SubTotal</th>
+                    <td class="product-subtotal" colspan="2">$<span id="checkoutTotal"><%= cartRegularTotal %></span></td>
+                  </tr>
+                  <tr>
+                    <th>Shipping</th>
+                    <td colspan="2"><em>Free Shipping</em></td>
+                  </tr>
+                  <% if (cartItems.COUPON) { %>
+                    <tr>
+                    <th>Coupon Discount</th>
+                    <td colspan="2" id="coupon-bill"><em>₹<%= cartItems.discount %> </em></td>
+                  </tr>
+                  <% } %>
+                 
+                  <tr>
+                    <th>Total</th>
+                    <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">$<span id="CheckoutTotal"><%= Math.round(total) %></span></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <% if (userData.wallet < total) { %>
+              <input value="true" class="form-check-input" type="checkbox" name="wallet" id="wallet" >
+              <label class="form-check-label"  for="wallet">Use Wallet balance <%= userData.wallet %> $</label>
+            <% } %>
+             
+          
+            <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+            
+            <div class="payment_method">
+              <div class="mb-25">
+                <h5>Payment</h5>
+              </div>
+              <div id="payment_option">
+                <div class="custome-radio">
+                  <input value="razorPay" class="form-check-input payment_option" type="radio" name="payment" id="razorPay" checked>
+                  <label class="form-check-label" for="razorPay">Razorpay</label>
+                </div>
+                <div class="custome-radio">
+                  <input value="Paypal" class="form-check-input payment_option" type="radio" name="payment" id="Paypal" >
+                  <label class="form-check-label" for="Paypal">Paypal</label>
+                </div>
+                <div class="custome-radio">
+                  <input value="COD" class="form-check-input payment_option" type="radio" name="payment" id="COD">
+                  <label class="form-check-label" for="COD">Cash on delivery</label>
+                </div>
+                <% if (userData.wallet > total) { %>
+                  <div class="custome-radio">
+                  <input value="wallet" class="form-check-input payment_option" type="radio" name="payment" id="wallet">
+                  <label class="form-check-label" for="wallet">Wallet</label>
+                </div>
+                <% } %>
+               
+              </div>
+            </div>
+             <button type="submit" class="btn btn-fill-out btn-block mt-30"> Place order</button>
+         </form>
+         
+         <div class="coupon mt-30 mb-30">
+          <div class="toggle_info">
+            <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a
+                coupon?</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your
+                code</a></span>
+          </div>
+          <div class="panel-collapse collapse coupon_form " id="coupon">
+            <div class="panel-body">
+              <p class="mb-30 font-sm">If you have a coupon code, please apply it below.
+              </p>
+              <form id="form-coupon">
+              <div class="form-group">
+                  <input type="text" id="code" placeholder="Enter Coupon Code...">
+                </div>
+                <div class="form-group">
+                  <button class="btn  btn-md" type="submit" >Apply Coupon</button>
+                </div>
+            </form>
+    
+    
+    
+    
+                </div>
+            </div>
+          </div>
+ 
+        </div>
+      </div>
+    </div>
+
+         
+    
+   
+   
+
+  
+    
+
+
+
+   
+   
+            
+  </section>
+  <% } else { %>
+  <section class="mt-50 mb-50">
+    <div class="container">
+      <div class="text-center">
+        <h3 class="mb-4">You can't checkout when cart is empty 🥲</h3>
+        <a class="btn" href="/"><i class="fi-rs-shopping-bag mr-10"></i>Return to shop</a>
+      </div>
+    </div>
+  </section>
+
+  <% } %>
+  <% } %>
+</main>
+
+<%- include('../partials/user-footer') %>

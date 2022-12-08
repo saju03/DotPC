@@ -1,0 +1,99 @@
+<%- include('../partials/user-headder') %>
+
+<main class="main">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html" rel="nofollow">Home</a>
+        <span></span> My Orders
+      </div>
+    </div>
+  </div>
+  <section class="pt-50 pb-150">
+      <div class="row">
+        <div class="col-lg-10 m-auto">
+          <div class="row">
+            <div class="col-md-2 ">
+              <div class="dashboard-menu">
+                <ul class="nav flex-column" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/profile"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/my-profile/view-orders"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/my-profile/address" class="nav-link"><i class="fi-rs-marker mr-10"></i>My Address</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/my-profile/edit"><i class="fi-rs-user mr-10"></i>Account details</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="tab-content dashboard-content">
+                <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="mb-0">Your Orders</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <% if (products) { %>
+                        <table class="table" >
+                          <thead>
+                            <tr>
+                              <th>Image</th>
+                              <th>Product</th>
+                              <th>Payment</th>
+                              <th>Amount</th>
+                              <th>Status</th>
+                              <th>Other</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <% products.forEach(element => { %>
+
+                            <tr>
+                              <td><img src="/images/<%=element.product.image%>" alt="" style="max-width:60px;"> </td>
+                              <td><a><%= element.product.ProductName%>  x (<%= element.product.count%>) </a></td>
+                              <td><%= element.Payment%></td>
+                              <td>$<%= element.product.count*element.product.Price %></td>
+                              <td id="product-staus"><%= element.product.status %> </td>
+                              <td><% if (element.product.status === 'Canceled' ) { %>
+                              Order Canceled
+                              <% } else if (element.product.status==='Delevered') { %>
+                                <a onclick="ReturnOrder('<%= element.product.productId%>','<%=orderId%>')" class="btn-small d-block">Return Order</a></td>
+                                <% } %>
+
+                                <%  if (element.product.status==='Ordered') { %>
+                                  <a onclick="CancelOrder('<%= element.product.productId%>','<%=orderId%>')" class="btn-small d-block">Cancel Order</a></td>
+                                
+                              <% } %>
+                           
+                            
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                        <% } else { %>
+                        <div>You haven't placed any orders yet!</div>
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+  </section>
+</main>
+
+
+<%- include('../partials/user-footer') %>

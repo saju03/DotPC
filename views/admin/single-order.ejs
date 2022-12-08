@@ -1,0 +1,90 @@
+
+ <%- include('../partials/admin-headder') %>
+ <script src="/javascripts/ajaxRequests.js"></script>
+ <html>
+    <body>
+        
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">sales report </h2>
+            
+        </div>
+        
+    </div>
+    <div class="card mb-4">
+     
+
+        <% if (order) { %>
+         
+      
+        
+        </header>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="table-responsive">
+                    <table class="table align-middle table-nowrap mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="align-middle" scope="col">Product</th>
+                                <th class="align-middle" scope="col">Price</th>
+                                <th class="align-middle" scope="col">Count</th>
+                                <th class="align-middle" scope="col">Total</th>
+                                <th class="align-middle" scope="col">Payment Status</th>
+                                <th class="align-middle" scope="col">Payment Method</th>
+                                <th class="align-middle" scope="col">Delivery Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% order.forEach(element => { %>
+
+                            <tr>
+                            
+                                <td>
+                                    <%= element.product.ProductName %>
+                                </td>
+                                    
+                             <td><%= element.product.Price %> </td>
+                                
+                                </td>
+                                <td>
+                                <%= element.product.count %> 
+
+                                </td>
+                                <td>
+                                    $<%= element.product.count*element.product.Price %> 
+                                    </td>
+                                <td>
+                                    <span class="badge badge-pill badge-soft-success"><%= element.PaymentStatus %> </span>
+                                </td>
+                                <td>
+                                    <i class="material-icons md-payment font-xxl text-muted mr-5"></i> <%= element.Payment %> 
+                                </td>
+                                <td>
+                                    to,<%= element.OrderAddress.name%>,<%= element.OrderAddress.mobile%>,<%= element.OrderAddress.place%>,<%= element.OrderAddress.pin%>
+                                    </td>
+                             
+                            </tr>
+                            <% }) %>
+                            
+                              </div>
+                              
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- table-responsive end// -->
+        </div>
+        <% } %>
+    </div>
+</section> <!-- content-main end// -->
+
+
+
+    <!-- Main Script -->
+    <script src="/javascripts/ajaxRequests.js"></script>
+    <%- include('../partials/admin-footer') %>
+</body>
+
+
+
+</html>

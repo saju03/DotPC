@@ -1,0 +1,266 @@
+<%- include('../partials/user-headder') %>
+<div class="container">
+  <!-- <section class="pt-50 pb-150"> -->
+
+          
+            <div class="row">
+        
+                <div class="col-md-3">
+      
+                  <div class="dashboard-menu">
+                    <ul class="nav flex-column" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link " href="/profile"><i class="fi-rs-shopping-bag mr-10"></i>Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/my-profile/view-orders"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/my-profile/address" class="nav-link"><i class="fi-rs-marker mr-10"></i>My Address</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/my-profile/wallet" class="nav-link "><i class="fi-rs-shopping-bag mr-10"></i>My Wallet</a>
+                      </li>
+                      <li class="nav-item active" style="background-color: #088178;">
+                        <a class="nav-link" style="color:white;" href="/my-profile/edit"><i class="fi-rs-settings-sliders mr-10"></i>Account details</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+             
+               
+              
+                <div class="col-md-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="account-settings">
+                    <div class="user-profile">
+                      <div class="user-avatar">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                      </div>
+                      <h5 class="user-name"><span><%= user[0].userName %></span> </h5>
+                      <h6 class="user-email"><%= user[0].userEmail %> </h6>
+                      <h6  class="user-email">MOB:<%= user[0].userPhone %></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-7 col-sm-7 col-7">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <h6 class="mb-2 text-primary">Personal Details</h6>
+                    </div>
+                    <form action="/my-profile/edit" method="post">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div class="form-group">
+                        <span id="name" class="mt-2 text-danger" style="font-size: 13px"></span>
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" name="name" id="Name" value="<%= user[0].userName %>" placeholder="Enter full name" onkeyup="validateName()">
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div class="form-group">
+                        <label for="eMail">Email</label>
+                        <span id="email" class="mt-2 text-danger" style="font-size: 13px"></span>
+                        <input type="email" class="form-control" name="email" id="Email" value="<%= user[0].userEmail %>" placeholder="Enter email ID" onkeyup="validEmail()">
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <span id="phonenumbers" class="mt-2 text-danger" style="font-size: 13px"></span>
+                        <input type="text" class="form-control" name="mobile" id="Phonenumbers" value="<%= user[0].userPhone %>" placeholder="Enter phone number" onkeyup="validPhoneumber()">
+                      </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <a  href="/change-password" style="margin:20px; color: rgb(0, 142, 81);">Change Password</a>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="text-right">
+                      
+                        <button type="submit" id="submit" style="margin-top:20px;"  class="btn btn-primary">Update</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        </div>
+        </div>
+      
+        </div>
+       
+        <style>
+          body {
+            margin: 0;
+            padding-top: 40px;
+            color: #2e323c;
+            background: #f5f6fa;
+            position: relative;
+            height: 100%;
+          }
+
+          .account-settings .user-profile {
+            margin: 0 0 1rem 0;
+            padding-bottom: 1rem;
+            text-align: center;
+          }
+
+          .account-settings .user-profile .user-avatar {
+            margin: 0 0 1rem 0;
+          }
+
+          .account-settings .user-profile .user-avatar img {
+            width: 90px;
+            height: 90px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+            border-radius: 100px;
+          }
+
+          .account-settings .user-profile h5.user-name {
+            margin: 0 0 0.5rem 0;
+          }
+
+          .account-settings .user-profile h6.user-email {
+            margin: 0;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #9fa8b9;
+          }
+
+          .account-settings .about {
+            margin: 2rem 0 0 0;
+            text-align: center;
+          }
+
+          .account-settings .about h5 {
+            margin: 0 0 15px 0;
+            color: #007ae1;
+          }
+
+          .account-settings .about p {
+            font-size: 0.825rem;
+          }
+
+          .form-control {
+            border: 1px solid #cfd1d8;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            font-size: .825rem;
+            background: #ffffff;
+            color: #2e323c;
+          }
+
+          .card {
+            background: #ffffff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 0;
+            margin-bottom: 1rem;
+          }
+        </style>
+
+        <%- include('../partials/user-footer') %>
+
+        <script>
+          var errorName = document.getElementById('name')
+    var errorEmail = document.getElementById('email')
+    var errorPassword = document.getElementById('passwords')
+    
+    var errorPhonenumber = document.getElementById('phonenumbers')
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorName.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorName.innerHTML = 'enter a valid name'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+    }
+    function validEmail() {
+        const email = document.getElementById('Email').value
+        if (email == "") {
+            errorEmail.innerHTML = "enter you email address"
+            return false
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            errorEmail.innerHTML = 'enter a proper email address'
+            return false
+        }
+        errorEmail.innerHTML = null
+        return true
+    }
+    function validPassowrd() {
+        const psd = document.getElementById('Passwords').value
+        if (psd == "") {
+            errorPassword.innerHTML = "enter a password"
+            return false
+        }
+        if (psd.length < 5) {
+           
+            errorPassword.innerHTML = "password should be more than five characters"
+            return false
+        }
+        errorPassword.innerHTML = null
+        return true
+    }
+ 
+    
+ 
+     function validPhoneumber() {
+        const mob = document.getElementById('Phonenumbers').value
+        if (mob == "") {
+            errorPhonenumber.innerHTML = "enter a phonenumber"
+            return false
+        }
+        if (mob.length != 10 || !mob.match(/^\d*$/)) {
+            errorPhonenumber.innerHTML = "Please Enter the valide phone number"
+            return false
+        }
+        errorPhonenumber.innerHTML = null
+        return true
+    }
+ 
+        function check(){
+              let validatearray =[!validateName() , !validEmail() , !validPassowrd() , !validPhoneumber()]
+ 
+              return validatearray.every(validation)
+             
+ 
+        }
+ 
+ 
+ 
+    function validation() {
+        if (!validateName() || !validEmail() || !validPassowrd() || !validPhoneumber() ) {
+            return false
+        }
+        return true
+    }
+
+        </script>

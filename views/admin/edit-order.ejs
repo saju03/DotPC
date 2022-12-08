@@ -1,0 +1,72 @@
+<%- include('../partials/admin-headder') %>
+
+<section class="content-main">
+    <div class="row">
+  
+         
+        
+        <form action="/admin/edit-order/<%= response[0]._id %>/<%= response[0].product.productId %>" method="post">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Order</h2>
+                <div>
+                    
+                    <button class="btn btn-md rounded font-sm hover-up" type="submit">Publich</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <label for="product_title" class="form-label">Product title</label>
+                        <label type="text" placeholder="Type here" class="form-control" id="product_title"><%= response[0].product.ProductName %> </label>
+                    </div>
+                    <div class="row gx-3">
+                    <div class="mb-4">
+                        <label for="product_brand" class="form-label">ID</label>
+                        <label type="text" placeholder="Type here" class="form-control" id="product_brand"><%= response[0].product.productId %></label>
+                    </div>
+                </div>
+
+                <div class="row gx-3">
+                    <div class="mb-4">
+                        <label for="product_brand" class="form-label">Address</label>
+                        <label type="text" placeholder="Type here" class="form-control" id="product_brand"></label>
+                    </div>
+                </div>  
+            </div> <!-- card end// -->
+          
+        </div>
+        <div class="col-lg-3">
+            <div class="card mb-4">
+                <div class="card-body" style="padding:10px;">
+                    <div class="mb-4">
+                        <label class="form-label">Count</label>
+                        <label type="text" placeholder="Type here" class="form-control"><%= response[0].product.count %></label>
+                    </div>
+                    
+                    <div class="mb-4" >
+                        <label class="form-label" >Status</label>
+                        <select class="form-select" name="status" style="width:120px;">
+                            <option>Canceled</option>
+                            <option>Ordered</option>
+                            <option>Placed</option>
+                            <option>Delevered</option>
+                            <option>Returned</option>
+                            <option>Refund</option>
+                        </select>
+                    </div>
+                   
+                </div>
+            </div> <!-- card end// -->
+            
+        </div>
+    </form>
+    
+    </div>
+</section>
+
+
+
+<%- include('../partials/admin-footer') %>

@@ -1,0 +1,126 @@
+
+ <%- include('../partials/admin-headder') %>
+ <html>
+    <body>
+        
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Category </h2>
+            <p>Add, edit or delete a category</p>
+        </div>
+        <div>
+            <input type="text" placeholder="Search Categories" class="form-control bg-white">
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <form id="add-category">
+                        <div class="mb-4">
+                            <label for="product_name"  class="form-label">Name</label>
+                            <input type="text" placeholder="Type here" name="categoryName" required class="form-control" id="product_name" />
+                        </div>
+                        
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Description</label>
+                            <input type="text" style="height: 80px;" placeholder="Type here" required name="categorDescription" class="form-control" id="product_name" />
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Create category</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-9">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" />
+                                        </div>
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    
+                                    
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <% category.forEach(element => { %>
+                             
+                            
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" />
+                                        </div>
+                                    </td>
+                                    <td><%= element._id %> </td>
+                                    <td><b><%= element.catName %> </b></td>
+                                    <td><%= element.catDiscription %> </td>
+                                    
+                                   
+                                    <td class="text-end">
+                                        <div class="dropdown">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                            <div class="dropdown-menu">
+                                               
+                                                <a class="dropdown-item" href="/admin/edit-categories/<%=element._id%>"> Edit info</a>
+                                                <a class="dropdown-item  text-danger" onclick="deleteCat('<%=element._id%>')" >Delete</a>
+                                            </div>
+                                        </div> <!-- dropdown //end -->
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                            <% }) %>
+                        </table>
+                    </div>
+                </div> <!-- .col// -->
+            </div> <!-- .row // -->
+        </div> <!-- card body .// -->
+    </div> <!-- card .// -->
+</section> <!-- content-main end// -->
+
+<script>
+   function deleteCat(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: `/admin/delete-categories/${id}`,
+          method: "GET",
+          success: (response) => {
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+        location.reload()
+      }
+    })
+  } 
+</script>
+<script src="/javascripts/ajaxRequests.js"></script>
+
+    <%- include('../partials/admin-footer') %>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+</html>

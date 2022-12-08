@@ -1,0 +1,118 @@
+<%- include('../partials/user-headder') %>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
+<main class="main">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html" rel="nofollow">Home</a>
+        <span></span> My account
+      </div>
+    </div>
+  </div>
+  <section class="pt-50 pb-150">
+    
+      <div class="row">
+        <div class="col-lg-10 m-auto">
+          <div class="row">
+            <div class="col-md-2 ">
+              <div class="dashboard-menu">
+                <ul class="nav flex-column" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/profile"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/my-profile/orders"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/my-profile/address" class="nav-link"><i class="fi-rs-marker mr-10"></i>My Address</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/my-profile/wallet" class="nav-link "><i class="fi-rs-marker mr-10"></i>My Wallet</a>
+                  </li>
+                  <li class="nav-item">
+                       <a class="nav-link" href="/my-profile/edit"><i class="fi-rs-user mr-10"></i>Account details</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-10 ">
+              <div class="tab-content dashboard-content">
+                <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="mb-0">Your Orders</h5>
+                    </div>
+                    <div class="card-body ">
+                      <div class="table-responsive" >
+                        <% if (orders) { %>
+                          <% if (orders.length>0) { %>
+                              <table class="table align-middle table-nowrap mb-0" id="order-table" >
+                                  <thead class="table-light">
+                                      <tr>
+                                          
+                                          <th class="align-middle" scope="col">Date</th>
+                                          <th class="align-middle" scope="col">Product</th>
+                                          <th class="align-middle" scope="col">Payment</th>
+                                          <th class="align-middle" scope="col">Total Amount</th>
+                                          <th class="align-middle" scope="col">Payment Status</th>
+                                          <th class="align-middle" scope="col">View Details</th>
+                                      </tr>
+                                  </thead>
+
+                                  <tbody>
+
+                                    <% orders.forEach(element => { %>
+                                      <% let orderDate = element.date%> 
+                                          <% const [Date, Month, Year] = orderDate.toLocaleDateString().split('/') %> 
+                                          <% const dateNow =  Date + '-' + Month + '-' + Year%>
+                                      <tr>
+                                          
+                                          <td class="fw-bold"><%= dateNow %> </td>
+                                          <td><%= element.product.length %> items</td>
+                                          <td>
+                                            <%= element.Payment%>
+                                          </td>
+                                          <td>
+                                            $<%= element.orderTotal %>
+                                          </td>
+                                          <td>
+                                              <span class=""><%= element.PaymentStatus %></span>
+                                          </td>
+                                         
+                                          <td>
+                                              <a href="/ordered-product/<%= element._id%>" > View details</a>
+                                          </td>
+                                      </tr>
+                                      <% }) %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div> <!-- table-responsive end// -->
+                      <% } else { %>
+                        <div>You haven't placed any orders yet!</div>
+                      <% } %>
+                      <% } %>
+                  </div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>  
+  </section>
+</main>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#order-table').DataTable();
+} );
+</script>
+<%- include('../partials/user-footer') %>

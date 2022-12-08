@@ -1,0 +1,130 @@
+<%- include('../partials/admin-headder') %>
+<html>
+
+<body>
+
+  <section class="content-main">
+    <form action="/admin/add-coupon" method="post">
+      <div class="row">
+        <div class="col-9">
+          <div class="content-header">
+            <h2 class="content-title">Add Coupon</h2>
+       
+           
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h4>coupon</h4>
+              <% if (err) { %>
+                <span style="color:red;">This coupon Alredy Exists</span>
+               <% } %>
+            </div>
+            <div class="card-body">
+              <form action="/admin/add-coupon" method="post">
+              <div class="mb-4">
+                <label for="couponCode" class="form-label">COUPON CODE</label>
+                <input type="text" placeholder="Type here" required name="couponCode"  class="form-control" id="couponCode">
+              </div>
+              <div class="mb-2">
+                <label for="discount" class="form-label">Discount %</label>
+                <input type="tel" placeholder="Type here" required name="discount"  class="form-control" id="discount">
+              </div>
+
+              <div class="mb-2">
+                <label for="maxLimit" class="form-label">Limit Upto</label>
+                <input type="tel" placeholder="Type here" required name="maxLimit"  class="form-control" id="maxLimit">
+              </div>
+              <div class="mb-2">
+                <label for="minLimit" class="form-label">Minimum purchase</label>
+                <input type="tel" placeholder="Type here" required name="minLimit"  class="form-control" id="minLimit">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label" for="expDate">Expire Date</label>
+                <input placeholder="Type here" type="date"  required name="expDate" class="form-control" rows="4" id="expDate"></input>
+              </div>
+              <div class="row">
+              <div class="col-lg-4">
+                </div>
+              </div>
+              <div class="col-9">
+                <div class="content-header">
+                  
+                  <div>
+                    <button type="submit" class="btn btn-md rounded font-sm hover-up">Create Coupon</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            </div>
+          </div> <!-- card end// -->
+
+        </div>   
+    </form>
+    <div class="card-body">
+      <div class="table-responsive">
+          <div class="table-responsive" id="coupon-table">
+              <table class="table align-middle table-nowrap mb-0" >
+                  <thead class="table-light">
+                      <tr>
+                      
+                          <th class="align-middle" scope="col">CODE</th>
+                          <th class="align-middle" scope="col">DISCOUNT</th>
+                          <th class="align-middle" scope="col">STATUS</th>
+                          <th class="align-middle" scope="col">MAXLIMIT</th>
+                          <th class="align-middle" scope="col">EXPIRE DATE</th>
+                          <th class="align-middle" scope="col">ACTION</th>
+
+                      
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% if (coupon) { %>
+                       
+                      <% coupon.forEach(element => { %>
+                        <% let orderDate = element.Expire%> 
+                                          <% const [Date, Month, Year] = orderDate.toLocaleDateString().split('/') %> 
+                                          <% const dateNow =  Date + '-' + Month + '-' + Year%>
+                      <tr>
+                          <td><%= element.code %> </td>
+                          <td><%= element.discount%> </td>
+                          <td><% if ( element.status) { %>
+                           Active
+                           <% } else { %>
+                            Used
+                          <% } %></td>
+                          <td><%= element.maxLimit %></td>
+                          <td><%=dateNow %></td>
+                          <td><a onclick="deleteCoupon('<%= element.code %>')">Delete</a></td>
+                      </tr> 
+                      <% }) %>
+                      <% } %>
+                  </tbody>
+              </table>
+          </div>
+      </div> <!-- table-responsive end// -->
+  </div>
+    </div>
+  </section> <!-- content-main end// -->
+
+  </main>
+  <script src="/javascripts/ajaxRequests.js"></script>
+  <script src="/admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+  <script src="/admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+  <script src="/admin-assets/js/vendors/select2.min.js"></script>
+  <script src="/admin-assets/js/vendors/perfect-scrollbar.js"></script>
+  <script src="/admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+  <script src="/admin-assets/js/vendors/chart.js"></script>
+  <!-- Main Scr/ipt -->
+  <script src="/admin-assets/js/main.js" type="text/javascript"></script>
+  <script src="/admin-assets/js/custom-chart.js" type="text/javascript"></script>
+  <%- include('../partials/admin-footer') %>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+
+</html> 
