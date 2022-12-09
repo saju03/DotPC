@@ -134,6 +134,10 @@ router.post('/apply-coupon',userController.applyCoupon)
 
 router.get('/my-profile/wallet',userController.getWallet)
 
+router.post('/shop-search',(req,res)=>{
+userHelper.productSearch(req.body)
+  
+})
 module.exports = router;
 
 

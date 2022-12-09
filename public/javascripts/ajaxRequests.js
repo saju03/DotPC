@@ -612,3 +612,14 @@ $('#add-category').submit((e)=>{
     })
    }
 
+function search(){
+  
+  let text = document.getElementById('search-text').value
+
+  $.ajax({
+    url:'/shop-search',
+    data:{text},
+    method:'POST'
+  })
+
+}

@@ -11,6 +11,7 @@ const Coupon = require('../model/couponModel')
 const mongoose = require('mongoose')
 const { use } = require('../routes/user')
 const { payment } = require('paypal-rest-sdk')
+const Product = require('../model/Product')
 module.exports = {
 
 
@@ -426,7 +427,13 @@ module.exports = {
         
 
     
-    }
+    },
+
+    productSearch:(searchText)=>{
+        return new Promise((resolve, reject) => {
+            Product.find()
+        })
+    } 
 
 
 }
