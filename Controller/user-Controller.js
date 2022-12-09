@@ -307,6 +307,8 @@ module.exports = {
 
   postAddAddress: (req, res) => {
 
+    console.log(req.body);
+    console.log('--------------------------------------------------------');
     userHelper.addAddress(req.session.user._id, req.body).then((data) => {
       res.json({ status: true })
     })

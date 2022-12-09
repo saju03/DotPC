@@ -1,7 +1,7 @@
 const express = require('express');
 const userHelper = require('../helpers/user-helpers');
 const userController = require('../Controller/user-Controller');
-const { response } = require('express');
+const { response, Router } = require('express');
 
 const userHelpers = require('../helpers/user-helpers');
 const mongoose = require('mongoose');
@@ -137,6 +137,10 @@ router.get('/my-profile/wallet',userController.getWallet)
 router.post('/shop-search',(req,res)=>{
 userHelper.productSearch(req.body)
   
+})
+
+router.get('/add-address-checkout',(req,res)=>{
+  res.render('user/add-Address')
 })
 module.exports = router;
 

@@ -222,7 +222,7 @@ function addAddress() {
         if (response.status) {
           await Swal.fire(
             'Address Added!',
-            '!',
+            '',
             'success'
           )
           location.href = '/my-profile/address'
@@ -233,7 +233,28 @@ function addAddress() {
   })
   
 }
-
+function addAddressCheckout() {
+  $('#add-address-checkout').submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: "/add-address",
+      type: "POST",
+      data: $('#add-address-checkout').serialize(),
+      success: async function (response) {
+        if (response.status) {
+          await Swal.fire(
+            'Address Added!',
+            '',
+            'success'
+          )
+          location.href = '/checkout'
+        }
+       
+      }
+    })
+  })
+  
+}
 
 function deleteAddress(userId, addressId) {
   Swal.fire({

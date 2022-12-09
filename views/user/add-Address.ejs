@@ -1,0 +1,107 @@
+<%- include('../partials/user-headder') %>
+<div class="container">
+<div class="row mx-1 mt-2">
+    <div class="toggle_info">
+      <span><i class="fi-rs-user mr-10"></i> <a href="#newAddress" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Add new address</a></span>
+    </div>
+   
+    <div  id="newAddress">
+      <div class="panel-body">
+        <form id="add-address-checkout">
+          <div class="form-group">
+            <input id="Name" required="" type="text" name="name" placeholder="Full name *" onchange="validateName()">
+            <span id="name" class="mt-2 text-danger" style="font-size: 13px"></span>
+          </div>
+          <div class="form-group">
+            <input required="" type="text" name="place" placeholder="Address *">
+          </div>
+          <div class="form-group">
+            <input required="" type="text" name="city" placeholder="City / Town *">
+          </div>
+          <div class="form-group">
+            <input required="" type="text" name="state" placeholder="State / County *">
+          </div>
+          <div class="form-group">
+            <input required="" id="Zip" type="tel" name="pin" placeholder="Postcode / ZIP *" onchange="validZipcode()">
+            <span id="zip" class="mt-2 text-danger" style="font-size: 13px"></span>
+          </div>
+          <div class="form-group">
+            <input required="" id="Phonenumbers" type="tel" name="mobile" placeholder="Phone *" onchange="validPhoneumber()">
+            <span id="phonenumbers" class="mt-2 text-danger" style="font-size: 13px"></span>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white border-radius-5 btn-shadow-brand hover-up" onclick="addAddressCheckout()" name="login">Add address</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/javascripts/validation.js"></script>
+
+<script>
+var errorName = document.getElementById('name')
+var errorPhonenumber = document.getElementById('phonenumbers')
+var errorZIP = document.getElementById('zip')
+function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorName.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorName.innerHTML = 'enter a valid name'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+    }
+
+    function validPhoneumber() {
+        const mob = document.getElementById('Phonenumbers').value
+        console.log(mob);
+        if (mob == "") {
+            errorPhonenumber.innerHTML = "enter a phonenumber"
+            return false
+        }
+        if (mob.length != 10 || !mob.match(/^\d*$/)) {
+            errorPhonenumber.innerHTML = "Please Enter the valide phone number"
+            return false
+        }
+        errorPhonenumber.innerHTML = null
+        return true
+    }
+
+    function validZipcode() {
+        const zip = document.getElementById('Zip').value
+        if (zip == "") {
+            errorZIP.innerHTML = "enter a pincode"
+            return false
+        }
+        if (zip.length < 6) {
+           
+            errorZIP.innerHTML = "enter a valid pin"
+            return false
+        }
+        if (!zip.match(/^\d*$/)) {
+            errorZIP.innerHTML = "Please Enter the valide zip"
+            return false
+        }
+        errorZIP.innerHTML = null
+        return true
+    }
+
+</script>
+
+
+
+
+
+
+  <%- include('../partials/user-footer') %>
