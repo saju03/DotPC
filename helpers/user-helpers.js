@@ -787,8 +787,8 @@ module.exports = {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "http://localhost:3000/success",
-          "cancel_url": "http://localhost:3000/cancel"
+          "return_url": process.env.SUCCESS_URL || "http://localhost:3000/success",
+          "cancel_url": process.env.CANCEL_URL ||"http://localhost:3000/cancel"
         },
         "transactions": [{
 
