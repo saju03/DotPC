@@ -123,7 +123,7 @@ module.exports = {
                 { $project: { product: 1,OrderAddress: 1  } },
                 { $unwind: '$product' },
                 { $match: { 'product.productId': ProductId } }
-            ]).then((address) => {
+            ]).then((product) => {
                     
                     resolve(product)
                 })
