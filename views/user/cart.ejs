@@ -37,7 +37,7 @@
                                       <h5 class="product-name"><a href="shop-product-right.html"><%= element.name %></a></h5>
                                      
                                   </td>
-                                  <td class="price" data-title="Price"><span>$<%=element.price %></span></td>
+                                  <td class="price" data-title="Price"><span>₹<%=element.price %></span></td>
                                   <td class="text-center" data-title="Stock">
                                       <div class="detail-qty border radius  m-auto">
                                           <a id="incProductCount"  onclick="incProductCount('<%=element._id %>','-1','<%=element.price %>','<%=element._id %>','<%=element.name%>')" class="qty-down"><i class="fi-rs-angle-small-down" style="margin:45px;"></i></a>
@@ -46,7 +46,7 @@
                                       </div>
                                   </td>
                                   <td class="text-right" data-title="Cart">
-                                    <span id="<%=element.name%>">$<%= element.price*element.count %></span>
+                                    <span id="<%=element.name%>">₹<%= element.price*element.count %></span>
                                   </td>
                                   <td class="action" data-title="Remove"><a onclick="RemoveFromCart('<%=element._id %>')" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                               </tr>
@@ -96,7 +96,7 @@
                                       <tbody>
                                           <tr>
                                               <td class="cart_total_label">Cart Subtotal</td>
-                                              <td class="cart_total_amount"><span class="font-lg fw-900 text-brand" id="subTotal">$
+                                              <td class="cart_total_amount"><span class="font-lg fw-900 text-brand" id="subTotal">₹
                                                 <% if (COUPON) { %>
                                                  <%= Math.round(SubTotal+discount) %>
                                                
@@ -113,7 +113,7 @@
                                           </tr>
                                           <tr>
                                               <td class="cart_total_label">Total</td>
-                                              <td class="cart_total_amount"><strong><span id="tableTotal" class="font-xl fw-900 text-brand">$<%= Math.round(SubTotal) %></span><% if (COUPON) { %>
+                                              <td class="cart_total_amount"><strong><span id="tableTotal" class="font-xl fw-900 text-brand">₹<%= Math.round(SubTotal) %></span><% if (COUPON) { %>
                                                <span style="color: green;" >Coupon Applied &nbsp;&nbsp;(- <%= discount %>) </span>
                                               <% } %></strong></td>
                                           </tr>

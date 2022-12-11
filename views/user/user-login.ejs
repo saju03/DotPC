@@ -14,11 +14,23 @@
           <div class="row">
               <div class="col-lg-10 ">   
                   <div class="row">
-                      <div class="col-lg-12 col-md-12 col-sm-12" style="" >
+                      <div class="col-lg-12 col-md-12 col-sm-12" >
                           <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5" style="max-width:600; min-width: 200px;margin: 0px !important;">
                               <div class="padding_eight_all bg-white">
                                   <div class="heading_s1">
                                       <h3 class="mb-30">Login</h3>
+                                      <% if (passwordNotMatch) { %>
+                                        <span style="color: red;">Password Not Match </span>
+                                        <% } %>
+
+                                        <%if (userBlocked) { %>
+                                            <span style="color: red;">Your account has been Blocked</span>
+                                            <% } %>
+                                        <%if (noUser) { %>
+                                            <span style="color: red;">No user found on this email</span>
+                                    
+                                      <% } %>
+                                      <span></span>
                                   </div>
                                   <form method="post" action="/login">
                                       <div class="form-group">

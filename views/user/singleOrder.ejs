@@ -62,7 +62,7 @@
                               <td><img src="/images/<%=element.product.image%>" alt="" style="max-width:60px;"> </td>
                               <td><a><%= element.product.ProductName%>  x (<%= element.product.count%>) </a></td>
                               <td><%= element.Payment%></td>
-                              <td>$<%= element.product.count*element.product.Price %></td>
+                              <td>₹<%= element.product.count*element.product.Price %></td>
                               <td id="product-staus"><%= element.product.status %> </td>
                               <td><% if (element.product.status === 'Canceled' ) { %>
                               Order Canceled

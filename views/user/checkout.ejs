@@ -75,7 +75,7 @@
                       </h5> <span class="product-qty">x <%= element.count %>
                       </span>
                     </td>
-                    <td id="checkout-total">$<span>
+                    <td id="checkout-total">₹<span>
                         <%= element.price*element.count%>
                       </span></td>
                   </tr>
@@ -83,7 +83,7 @@
                   <% }) %>
                   <tr>
                     <th>SubTotal</th>
-                    <td class="product-subtotal" colspan="2">$<span id="checkoutTotal"><%= cartRegularTotal %></span></td>
+                    <td class="product-subtotal" colspan="2">₹<span id="checkoutTotal"><%= cartRegularTotal %></span></td>
                   </tr>
                   <tr>
                     <th>Shipping</th>
@@ -98,7 +98,7 @@
                  
                   <tr>
                     <th>Total</th>
-                    <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">$<span id="CheckoutTotal"><%= Math.round(total) %></span></span>
+                    <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">₹<span id="CheckoutTotal"><%= Math.round(total) %></span></span>
                     </td>
                   </tr>
                 </tbody>
@@ -106,7 +106,7 @@
             </div>
             <% if (userData.wallet < total) { %>
               <input value="true" class="form-check-input" type="checkbox" name="wallet" id="wallet" >
-              <label class="form-check-label"  for="wallet">Use Wallet balance <%= userData.wallet %> $</label>
+              <label class="form-check-label"  for="wallet">Use Wallet balance <%= userData.wallet %> ₹</label>
             <% } %>
              
           

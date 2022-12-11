@@ -146,17 +146,17 @@ module.exports = {
                 response.userLogin = true;
                 resolve(response);
               } else {
-                resolve({ userLogin: false });
+                resolve({ userLogin: false ,passwordNotMatch:true});
               }
             });
           } else {
             resolve({ userLogin: false });
           }
         } else {
-          resolve({ userLogin: false });
+          resolve({ userLogin: false ,userBlocked:true});
         }
       } else {
-        resolve({ userLogin: false });
+        resolve({ userLogin: false , noUser:true });
       }
     });
   }),
@@ -989,8 +989,7 @@ module.exports = {
     text=text.trim()  
 
     return new Promise((resolve, reject) => {
-      console.log(text);
-      console.log(text.length);
+  
       if (text.length > 0) {
         Product.find({
           name:{$regex:text,$options: 'i'}

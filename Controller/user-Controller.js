@@ -53,7 +53,27 @@ module.exports = {
       res.redirect('/')
     }
     else {
-      res.render('user/user-login')
+      console.log(req.session.passwordNotMatch);
+      if (req.session.passwordNotMatch) {
+        let passwordNotMatch = req.session.passwordNotMatch
+        req.session.passwordNotMatch=false
+        res.render('user/user-login',{passwordNotMatch,userBlocked:false,noUser:false})
+      }
+      if (req.session.noUser) {
+        let noUser = req.session.noUser
+        req.session.noUser=false
+        res.render('user/user-login',{passwordNotMatch:false,userBlocked:false,noUser})
+      }
+      if (req.session.userBlocked) {
+        let userBlocked = req.session.userBlocked
+        req.session.userBlocked = false
+        res.render('user/user-login',{passwordNotMatch:false,userBlocked,noUser:false})
+      }
+      else{
+        res.render('user/user-login',{passwordNotMatch:false,userBlocked:false,noUser:false})
+      }
+    
+      
     }
 
   },
@@ -105,7 +125,21 @@ module.exports = {
         res.redirect('/')
       }
       else {
-        res.redirect('/login')
+        if (response.noUser) {
+          req.session.noUser = true
+          res.redirect('/login')
+        }
+        if (response.userBlocked) {
+          req.session.userBlocked = true
+          res.redirect('/login')
+        }
+        if (response.passwordNotMatch) {
+          req.session.passwordNotMatch = true
+          res.redirect('/login')
+        }
+      
+        
+        
 
       }
     })
