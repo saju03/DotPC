@@ -124,6 +124,7 @@ module.exports = {
         req.session.user = response.user
         res.redirect('/')
       }
+
       else {
         if (response.noUser) {
           req.session.noUser = true
