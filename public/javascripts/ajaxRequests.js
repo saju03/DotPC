@@ -634,13 +634,41 @@ $('#add-category').submit((e)=>{
    }
 
 function search(){
-  
   let text = document.getElementById('search-text').value
+ document.getElementById("search-table1").style.display = "none";
+ document.getElementById("search-table2").style.display = "none";
 
+
+ 
+ 
   $.ajax({
     url:'/shop-search',
     data:{text},
-    method:'POST'
+    method:'POST',
+    success:(searchResponse)=>{
+      if (searchResponse.length == 0) {
+        document.getElementById("no-result").style.display = "block";
+        document.getElementById("no-result").innerHTML = 'no result found'
+        
+       
+      }else{
+       document.getElementById("search-table1").style.display = "block";
+       document.getElementById("no-result").style.display = "none";
+      document.getElementById("search-data").innerHTML = searchResponse[0].name
+      document.getElementById("search-data").href = 'product-details/'+searchResponse[0]._id
+     
+      
+      if (searchResponse.length >1) {
+        document.getElementById("no-result").style.display = "none";
+      document.getElementById("search-data2").innerHTML = searchResponse[1].name
+      document.getElementById("search-table2").style.display = "block";
+      }
+
+      
+      }
+      
+    }
   })
 
 }
+

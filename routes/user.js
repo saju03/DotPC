@@ -135,8 +135,9 @@ router.post('/apply-coupon',userController.applyCoupon)
 router.get('/my-profile/wallet',userController.getWallet)
 
 router.post('/shop-search',(req,res)=>{
-userHelper.productSearch(req.body)
-  
+userHelper.productSearch(req.body.text).then((response)=>{
+  res.json(response)
+})
 })
 
 router.get('/add-address-checkout',(req,res)=>{
@@ -144,7 +145,33 @@ router.get('/add-address-checkout',(req,res)=>{
 })
 module.exports = router;
 
+router.get('/shop',(req,res)=>{
+  userHelper.getAllProducts().then((products)=>{
+    if(req.session.user){
+      let user = req.session.user
+  res.render('user/shop',{products,user})
+    }else{
+      res.render('user/shop',{products})
+    }
+    
+  })
 
+})
+
+router.get('/filter-category/:catName',(req,res)=>{
+ userHelper.filerCategory(req.params.catName).then((products)=>{
+  res.render("user/shop",{products})
+ })
+})
+
+router.get("/search-items",(req,res)=>{
+  if (req.query.text.length>0) {
+    userHelper.productSearch(req.query.text).then((products)=>{
+      res.render("user/shop",{products})
+    })
+  }
+  
+})
 
 
 

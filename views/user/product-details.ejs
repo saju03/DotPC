@@ -277,13 +277,7 @@
                               </div>
                           </div>
                       </div> -->
-            <div class="banner-img banner-big wow fadeIn f-none animated mt-50">
-              <img class="border-radius-10" src="" alt="">
-              <div class="banner-text">
-                <h4 class="mb-15 mt-40">Repair Services</h4>
-                <h2 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h2>
-              </div>
-            </div>
+           
           </div>
         </div>
         <div class="col-lg-3 primary-sidebar sticky-sidebar">
@@ -291,7 +285,7 @@
             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
             <ul class="categories">
               <% categories.forEach(element => { %>
-              <li><a href="shop-grid-right.html"><%= element.catName %> </a></li>
+              <li><a href="/filter-category/<%= element.catName %>"><%= element.catName %> </a></li>
               <% }) %>
 
 

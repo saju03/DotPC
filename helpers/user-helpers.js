@@ -915,8 +915,6 @@ module.exports = {
                 else {
                   resolve({ noMinPurchase: true })
                 }
-
-
               });
 
 
@@ -939,13 +937,10 @@ module.exports = {
   },
 
   applyCoupon: (coupon, userId) => {
-
     userId = mongoose.Types.ObjectId(userId);
-
     return new Promise((resolve, reject) => {
       Coupon.findOne({ code: coupon.Code }).then((CouponData) => {
         Cart.findOneAndUpdate({ user: userId }, { $set: { discount: coupon.discount, couponStatus: true, couponMin: CouponData.minLimit } }, { upsert: true }).then((data) => {
-
           if (data) {
             Coupon.findOneAndUpdate({ code: coupon.Code }, { $set: { status: false } }).then(() => {
               resolve({ status: true })
@@ -953,13 +948,9 @@ module.exports = {
           }
 
         })
-
-
       })
 
     })
-
-
   },
 
   walletPayment: (orderId, total, userId) => {
@@ -972,6 +963,44 @@ module.exports = {
         })
       })
     })
-  }
+  },
+
+  getAllProducts:()=>{
+    return new Promise((resolve, reject) => {
+      Product.aggregate([{$match:{}}]).then((products)=>{
+        resolve(products)
+      })
+    })
+  },
+
+  filerCategory:(categoryName)=>{
+    return new Promise((resolve, reject) => {
+      Product.aggregate([
+        {$match:{category:categoryName}}
+      ]).then((products)=>{
+        resolve(products)
+      })
+    })
+  },
+
+  //for search suggestion
+
+  productSearch:(text)=>{
+    text=text.trim()  
+
+    return new Promise((resolve, reject) => {
+      console.log(text);
+      console.log(text.length);
+      if (text.length > 0) {
+        Product.find({
+          name:{$regex:text,$options: 'i'}
+        }).then((data)=>{
+          resolve(data)
+        })
+      }
+        
+    })
+  },
+
 
 };

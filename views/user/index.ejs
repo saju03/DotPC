@@ -16,7 +16,7 @@
                        
                       
                       <% categories.forEach(element => { %>
-                          <li ><a href="shop-grid-right.html"><i class="evara-font-cpu"></i><%= element.catName %></a> </li> 
+                          <li ><a href="/filter-category/<%= element.catName %>"><i class="evara-font-cpu"></i><%= element.catName %></a> </li> 
                           
                       <% }) %>
                      <% } %>
@@ -52,23 +52,6 @@
           </div>
       </div>
   </section>
-  <!-- <section >
-      <div class="container">
-
-          <div class="row">
-              <div class="col-lg-4 col-md-6">
-                  <div class="banner-img wow fadeIn animated">
-                      <img src="assets/imgs/banner/banner-1.png" alt="">
-                      <div class="banner-text">
-                          <span>Smart Offer</span>
-                          <h4>Save 20% on <br>AIO COOLERS</h4>
-                          <a href="shop-grid-right.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section> -->
 
 
   <section >
@@ -143,8 +126,8 @@
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up" onclick="addToWishlist('<%= element._id%>')" id="addtowish"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Add To Cart" class="action-btn hover-up"  onclick="addToCart('<%= element._id%>')" id="addtoCart"><i class="fi-rs-shopping-bag-add"></i></a>
                                             <% } else { %>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"><i class="fi-rs-heart"></i></a>
-                                              <a aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Wishlist" href="/login" class="action-btn hover-up"><i class="fi-rs-heart"></i></a>
+                                              <a href="/login" aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></a>
                                               <% }%>
                                            </div>
                                       </div>

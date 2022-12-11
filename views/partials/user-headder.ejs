@@ -86,14 +86,7 @@
             <div class="col-xl-3 col-lg-4" style="margin-right: 0px;margin-left:auto;">
               <div class="header-info header-info-right">
                 <ul>
-                  <li>
-                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                    <ul class="language-dropdown">
-                      <li><a href="#"><img src="/assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                      <li><a href="#"><img src="/assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                      <li><a href="#"><img src="/assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                    </ul>
-                  </li>
+                 
             
                   <% if (locals.user) { %>
 
@@ -116,9 +109,27 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form>
-                            <input type="text" placeholder="Search for items..." id="search-text" onkeyup="search()">
-                        </form>
+                        <form action="/search-items" method="get">
+                            <input type="text" name="text" placeholder="Search for items..." id="search-text" onkeyup="search()">
+                       <button type="submit">go</button> 
+                      </form>
+                        
+                   <table class="table">
+  <thead>
+ 
+  </thead>
+  <tbody>
+    <tr>
+      <td  id="search-table1" style="display: none;"><a id="search-data"  href=''></a></td>
+    </tr>
+    <tr>
+      <td id="search-table2" style="display: none;"><a id="search-data2"   ></a></td>
+    </tr>
+    <tr>
+      <td id="no-result" style="display: none;"></td>
+    </tr>
+  </tbody>
+</table>
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
@@ -133,7 +144,6 @@
                                     <img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg">
                                     <!-- <span class="pro-count blue">2</span> -->
                                 </a>
-                                
                             </div>
                         </div>
                     </div>
@@ -171,27 +181,32 @@
                     <div class="hotline d-none d-lg-block">
                         <p><i class="fi-rs-headset"></i><span>Hotline</span> 1900 - 888 </p>
                     </div>
-                    <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
+                    
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                <a href="/my-wishlist">
                                     <img alt="Evara" src="/assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">4</span>
+                                    <!-- <span class="pro-count white">4</span> -->
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="/cart">
                                     <img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
+                                    <!-- <span class="pro-count white">2</span> -->
                                 </a>
                                
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
-                                <div class="burger-icon burger-icon-white">
-                                    <span class="burger-icon-top"></span>
-                                    <span class="burger-icon-mid"></span>
-                                    <span class="burger-icon-bottom"></span>
+                              
+                             
+                                  <% if (locals.user) { %>
+                                   
+                                  
+                                    <a href="/profile"class="burger-icon-top" style="color: black;"><i class="fi-rs-user"  ></i>  </a>
+                                    <% } else { %>
+                                       <a href="/profile"class="burger-icon-top"style="color: black;"><i class="fi-rs-user"  ></i></a>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
