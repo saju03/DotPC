@@ -652,8 +652,9 @@ function search(){
         
        
       }else{
+        document.getElementById("no-result").style.display = "none";
        document.getElementById("search-table1").style.display = "block";
-       document.getElementById("no-result").style.display = "none";
+       
       document.getElementById("search-data").innerHTML = searchResponse[0].name
       document.getElementById("search-data").href = 'product-details/'+searchResponse[0]._id
      
@@ -661,6 +662,7 @@ function search(){
       if (searchResponse.length >1) {
         document.getElementById("no-result").style.display = "none";
       document.getElementById("search-data2").innerHTML = searchResponse[1].name
+      document.getElementById("search-data2").href = 'product-details/'+searchResponse[1]._id
       document.getElementById("search-table2").style.display = "block";
       }
 

@@ -74,7 +74,6 @@ router.get('/logout', userController.getLogout)
 router.get('/cart', userController.getCart)
 
 router.get('/add-to-cart/:id', userController.addToCart)
-
 //                  CHANGE THIS TO OTHER HTTP METHODS
 /*------------------------------------------------------------------ */
 router.get('/remove-from-cart/:id', userController.deleteFromCart)
@@ -169,6 +168,9 @@ router.get("/search-items",(req,res)=>{
     userHelper.productSearch(req.query.text).then((products)=>{
       res.render("user/shop",{products})
     })
+  }
+  else{
+    res.redirect('/')
   }
   
 })
