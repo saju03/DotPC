@@ -2,7 +2,7 @@ const express = require('express');
 const userHelper = require('../helpers/user-helpers');
 const userController = require('../Controller/user-Controller');
 const { response, Router } = require('express');
-
+const userAuthentication = require('../Middlewares/userAuthentication')
 const userHelpers = require('../helpers/user-helpers');
 const mongoose = require('mongoose');
 const { resolveInclude } = require('ejs');

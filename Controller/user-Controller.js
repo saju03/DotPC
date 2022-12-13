@@ -152,6 +152,7 @@ module.exports = {
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
     req.session.userlogged = false
+    req.session.user = false
     res.redirect('/')
   },
 
