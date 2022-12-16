@@ -159,14 +159,24 @@ router.get('/shop',(req,res)=>{
 
 router.get('/filter-category/:catName',(req,res)=>{
  userHelper.filerCategory(req.params.catName).then((products)=>{
-  res.render("user/shop",{products})
+  if(req.session.user){
+    let user = req.session.user
+res.render('user/shop',{products,user})
+  }else{
+    res.render('user/shop',{products})
+  }
  })
 })
 
 router.get("/search-items",(req,res)=>{
   if (req.query.text.length>0) {
     userHelper.productSearch(req.query.text).then((products)=>{
-      res.render("user/shop",{products})
+      if(req.session.user){
+        let user = req.session.user
+    res.render('user/shop',{products,user})
+      }else{
+        res.render('user/shop',{products})
+      }
     })
   }
   else{

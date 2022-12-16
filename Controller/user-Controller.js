@@ -164,7 +164,9 @@ module.exports = {
     else {
 
       if (req.session.noUser) {
+
         let noUser = req.session.noUser
+        req.session.noUser = false
         res.render('user/get-mobile', { noUser })
       }
       else {
