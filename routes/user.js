@@ -6,6 +6,7 @@ const userAuthentication = require('../Middlewares/userAuthentication')
 const userHelpers = require('../helpers/user-helpers');
 const mongoose = require('mongoose');
 const { resolveInclude } = require('ejs');
+const { addAddressCheckout, getSearch } = require('../Controller/user-Controller');
 const router = express.Router();
 
 
@@ -74,7 +75,7 @@ router.get('/logout', userController.getLogout)
 router.get('/cart', userController.getCart)
 
 router.get('/add-to-cart/:id', userController.addToCart)
-//                  CHANGE THIS TO OTHER HTTP METHODS
+
 /*------------------------------------------------------------------ */
 router.get('/remove-from-cart/:id', userController.deleteFromCart)
 
@@ -107,84 +108,42 @@ router.get("/change-password", userController.sentOtpToUserMobile)
 
 router.post('/verifyOtp', userController.verifyOtp)
 
-router.post("/changepassword",userController.postChangePassword)
+router.post('/changepassword', userController.postChangePassword)
 
-router.get('/add-to-wish/:productId',userController.addToWishlist)
+router.get('/add-to-wish/:productId', userController.addToWishlist)
 
-router.get('/my-wishlist',userController.getUserWishlist)
+router.get('/my-wishlist', userController.getUserWishlist)
 
-router.get('/remove-from-wishlist/:productId',userController.removefromWishlist )
+router.get('/remove-from-wishlist/:productId', userController.removefromWishlist )
 
-router.get('/addto-cart-from-wishlist/:productId',userController.addToCartFromWish)
-
-router.post('/verify-payment',userController.verifyPayment)
+router.get('/addto-cart-from-wishlist/:productId', userController.addToCartFromWish)
+ 
+router.post('/verify-payment', userController.verifyPayment);
 
 router.get('/success',userController.paypalSuccessPage);
 
 router.get('/order-placed',userController.orderPlaced);
 
-router.post('/my-profile/edit',userController.postEditProfile)
+router.post('/my-profile/edit', userController.postEditProfile);
 
-router.get("/filter-brand/:brand",userController.filterBrand)
+router.get('/filter-brand/:brand', userController.filterBrand);
 
-router.post('/verify-coupon',userController.verifyCoupon)
+router.post('/verify-coupon', userController.verifyCoupon);
 
-router.post('/apply-coupon',userController.applyCoupon)
+router.post('/apply-coupon', userController.applyCoupon);
 
-router.get('/my-profile/wallet',userController.getWallet)
+router.get('/my-profile/wallet', userController.getWallet);
 
-router.post('/shop-search',(req,res)=>{
-userHelper.productSearch(req.body.text).then((response)=>{
-  res.json(response)
-})
-})
+router.post('/shop-search', userController.shopSearch);
 
-router.get('/add-address-checkout',(req,res)=>{
-  res.render('user/add-Address')
-})
+router.get('/add-address-checkout', addAddressCheckout);
 module.exports = router;
 
-router.get('/shop',(req,res)=>{
-  userHelper.getAllProducts().then((products)=>{
-    if(req.session.user){
-      let user = req.session.user
-  res.render('user/shop',{products,user})
-    }else{
-      res.render('user/shop',{products})
-    }
-    
-  })
+router.get('/shop',userController.goToShop)
 
-})
+router.get('/filter-category/:catName',userController.categoryFilter)
 
-router.get('/filter-category/:catName',(req,res)=>{
- userHelper.filerCategory(req.params.catName).then((products)=>{
-  if(req.session.user){
-    let user = req.session.user
-res.render('user/shop',{products,user})
-  }else{
-    res.render('user/shop',{products})
-  }
- })
-})
-
-router.get("/search-items",(req,res)=>{
-  if (req.query.text.length>0) {
-    userHelper.productSearch(req.query.text).then((products)=>{
-      if(req.session.user){
-        let user = req.session.user
-    res.render('user/shop',{products,user})
-      }else{
-        res.render('user/shop',{products})
-      }
-    })
-  }
-  else{
-    res.redirect('/')
-  }
-  
-})
+router.get('/search-items', getSearch)
 
 
 
-//validataion ordrer placed cart clear popups

@@ -138,10 +138,6 @@ module.exports = {
           req.session.passwordNotMatch = true
           res.redirect('/login')
         }
-      
-        
-        
-
       }
     })
 
@@ -702,7 +698,56 @@ getWallet:(req,res)=>{
    
   
     
-  }
+  },
+
+  shopSearch:(req,res)=>{
+    userHelper.productSearch(req.body.text).then((response)=>{
+      res.json(response)
+    })
+    },
+
+    addAddressCheckout:(req,res)=>{
+      res.render('user/add-Address')
+    },
+    goToShop:(req,res)=>{
+      userHelper.getAllProducts().then((products)=>{
+        if(req.session.user){
+          let user = req.session.user
+      res.render('user/shop',{products,user})
+        }else{
+          res.render('user/shop',{products})
+        }
+        
+      })
+    
+    },
+
+    categoryFilter:(req,res)=>{
+      userHelper.filerCategory(req.params.catName).then((products)=>{
+       if(req.session.user){
+         let user = req.session.user
+     res.render('user/shop',{products,user})
+       }else{
+         res.render('user/shop',{products})
+       }
+      })
+     },
+     getSearch:(req,res)=>{
+      if (req.query.text.length>0) {
+        userHelper.productSearch(req.query.text).then((products)=>{
+          if(req.session.user){
+            let user = req.session.user
+        res.render('user/shop',{products,user})
+          }else{
+            res.render('user/shop',{products})
+          }
+        })
+      }
+      else{
+        res.redirect('/')
+      }
+      
+    }
 
 
 }

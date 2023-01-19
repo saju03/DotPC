@@ -33,9 +33,7 @@ module.exports = {
 
         let product = []
         PRODUCT.forEach(element => {
-          //if (element.brandOffer>element.productOffer) {
-
-          //}
+ 
           if (element.brandOffer > element.productOffer) {
             let offer = (element.price / 100) * element.brandOffer
 
@@ -48,9 +46,6 @@ module.exports = {
           }
 
           product.push(element)
-
-
-
 
         });
         console.log(product);
