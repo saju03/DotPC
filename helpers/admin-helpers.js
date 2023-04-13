@@ -9,8 +9,6 @@ const Brand = require('../model/brandModel')
 const Coupon = require('../model/couponModel')
 
 const mongoose = require('mongoose')
-const { use } = require('../routes/user')
-const { payment } = require('paypal-rest-sdk')
 const Product = require('../model/Product')
 module.exports = {
 
@@ -18,12 +16,13 @@ module.exports = {
     adminLogin: (adminData) => {
         return new Promise((resolve, reject) => {
             AdminDb.find({ adminEmail: adminData.adminemail }).then((admin) => {  //it returns an array
-
+                console.log(admin);
                 if (admin[0]) {
 
                     bcrypt.compare(adminData.password, admin[0].adminPassword).then((status) => {
-
+                        console.log(status);
                         if (status) {
+                            
                             Orders.aggregate([
                             {$match:{}}
                             ])
